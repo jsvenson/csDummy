@@ -48,11 +48,11 @@ class csDummy {
 		"Rosalie", "Ruhi", "Samantha", "Sara", "Sarah", "Shreya", "Sofía", "Sophia", "Sophie", "Susan", "Tiffany", 
 		"Valentina", "Valeria", "Victoria", "Vitória", "Vivian", "Ximena", "Yasmin");
 	
-	var $address_suffix = array("Alley", "Aly.", "Bay", "Drive", "Dr.", "Close", "Gardens", "Gdns.", "Gate", "Lane", "Ln.", 
+	private static $address_suffix = array("Alley", "Aly.", "Bay", "Drive", "Dr.", "Close", "Gardens", "Gdns.", "Gate", "Lane", "Ln.", 
 		"Manor", "Mnr.", "Passage", "Psge.", "Pathway", "Pthwy.", "Place", "Pl.", "Row", "Terrace", "Ter.", "Trace", 
 		"Trce.", "Trail", "Trl.", "View", "Vw.", "Way", "Street", "Avenue");
 	
-	var $address_street_name = array("Second", "Third", "First", "Fourth", "Park", "Fifth", "Main", "Sixth", "Oak", "Seventh", 
+	private static $address_street_name = array("Second", "Third", "First", "Fourth", "Park", "Fifth", "Main", "Sixth", "Oak", "Seventh", 
 		"Pine", "Maple", "Cedar", "Eighth", "Elm", "View", "Washington", "Ninth", "Lake", "Hill");
 	
 	public static function GivenName($gender = null) {
@@ -70,10 +70,16 @@ class csDummy {
 	public static function Email() {
 		return 'test@example.com';
 	}
+	
+    public static function Address() {
+        return mt_rand(12, 15673) . ' ' . 
+            self::$address_street_name[array_rand(self::$address_street_name)] . ' ' . 
+            self::$address_suffix[array_rand(self::$address_suffix)];
+    }
 }
 
-for ($i=0;$i<100;$i++) {
-    echo csDummy::GivenName($i%2?'male':'female') . ' ' . csDummy::Surname();
+for ($i=0;$i<20;$i++) {
+    echo csDummy::Address();
     echo "\n";
 }
 
